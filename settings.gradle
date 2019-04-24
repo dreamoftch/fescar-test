@@ -1,0 +1,4 @@
+rootProject.name = 'fescar'
+include('server1')
+include('server2')
+include('test')
