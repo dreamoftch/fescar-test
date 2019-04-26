@@ -26,5 +26,8 @@
 /.nb-gradle/
 
 server1/out/
+server1/build/
 server2/out/
+server2/build/
 test/out/
+test/build/
