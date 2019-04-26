@@ -35,7 +35,8 @@ dependencies {
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation "com.alibaba.fescar:fescar-rm-datasource:0.3.0"
+	implementation "io.seata:seata-rm-datasource:0.5.0"
+	implementation "io.seata:seata-tm:0.5.0"
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

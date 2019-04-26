@@ -1,6 +1,6 @@
 package com.tch.test.fescar1.controller
 
-import com.alibaba.fescar.core.context.RootContext
+import io.seata.core.context.RootContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.web.bind.annotation.GetMapping

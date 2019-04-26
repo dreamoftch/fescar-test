@@ -29,8 +29,8 @@ repositories {
 }
 
 dependencies {
-	compile "com.alibaba.fescar:fescar-rm-datasource:0.3.0"
-	compile "com.alibaba.fescar:fescar-tm:0.3.0"
+	compile "io.seata:seata-rm-datasource:0.5.0"
+	compile "io.seata:seata-tm:0.5.0"
 	compile 'com.github.kevinsawicki:http-request:6.0'
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"

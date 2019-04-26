@@ -1,7 +1,7 @@
 package com.tch.test.fescar1.configuration
 
 import com.alibaba.druid.pool.DruidDataSource
-import com.alibaba.fescar.rm.datasource.DataSourceProxy
+import io.seata.rm.datasource.DataSourceProxy
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.JdbcTemplate
