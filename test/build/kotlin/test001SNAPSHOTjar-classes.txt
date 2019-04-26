@@ -1,1 +1,0 @@
-/Users/higgs/study/fescar-test/test/build/classes/kotlin/main/com/tch/fescartest/FescarTestKt$main$1.class:/Users/higgs/study/fescar-test/test/build/classes/kotlin/main/com/tch/fescartest/FescarTestKt.class
