@@ -17,9 +17,9 @@ private const val APPLICATION_ID = "my_test_app"
 private const val TX_SERVICE_GROUP = "my_test_tx_group"
 
 fun main(args: Array<String>) {
-//    TMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
-//    RMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
-//    testException()
+    TMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
+    RMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
+    testException()
 //    testNormal()
 //    testTimeout()
 //    testCrash()

@@ -28,7 +28,7 @@ class HelloWorldController {
         println("get from context ${RootContext.getXID()}, ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())}")
         val name = "updated-user-2"
         jdbcTemplate.update("update user2 set name = '$name' where id = 1")
-        System.exit(1)
+//        System.exit(1)
         return "success"
     }
 

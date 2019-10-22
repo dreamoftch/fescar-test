@@ -18,7 +18,7 @@ class Configuration {
     @Bean(initMethod = "init", destroyMethod = "close")
     fun getDataSource(): DruidDataSource {
         return DruidDataSource().apply {
-            url = "jdbc:mysql://localhost:3307/test1"
+            url = "jdbc:mysql://localhost:3306/test1"
             username = "root"
             password = "root"
             driverClassName = "com.mysql.jdbc.Driver"
