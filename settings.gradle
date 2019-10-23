@@ -1,4 +1,5 @@
 rootProject.name = 'fescar'
+include('api')
 include('server1')
 include('server2')
 include('test')

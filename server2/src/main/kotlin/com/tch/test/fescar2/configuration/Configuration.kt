@@ -2,6 +2,7 @@ package com.tch.test.fescar2.configuration
 
 import com.alibaba.druid.pool.DruidDataSource
 import io.seata.rm.datasource.DataSourceProxy
+import io.seata.spring.annotation.GlobalTransactionScanner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jdbc.core.JdbcTemplate
@@ -35,5 +36,12 @@ class Configuration {
         return JdbcTemplate().apply {
             this.dataSource = dataSourceProxy
         }
+    }
+
+    @Bean
+    fun getGlobalTransactionScanner(): GlobalTransactionScanner {
+        val applicationId = "my_test_app2"
+        val transactionServiceGroup = "my_test_tx_group"
+        return GlobalTransactionScanner(applicationId, transactionServiceGroup)
     }
 }
