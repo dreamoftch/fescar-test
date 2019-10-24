@@ -33,7 +33,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
-	implementation "io.seata:seata-all:0.9.0"
+	implementation "io.seata:seata-all:0.8.0"
 }
 
 compileKotlin {
