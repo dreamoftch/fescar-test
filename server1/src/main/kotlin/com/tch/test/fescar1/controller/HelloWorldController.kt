@@ -1,5 +1,6 @@
 package com.tch.test.fescar1.controller
 
+import com.tch.test.api.getTime
 import io.seata.core.context.RootContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
@@ -22,9 +23,20 @@ class HelloWorldController {
     @GetMapping
     fun test(@RequestParam(value = "xid") xid: String): String {
         RootContext.bind(xid)
-        println("get from context ${RootContext.getXID()}")
         val name = "updated-user-1"
+        println("begin test ${getTime()}")
         jdbcTemplate.update("update user1 set name = '$name' where id = 1")
+        println("finish test ${getTime()}")
+        return "success"
+    }
+
+    @GetMapping(path = ["/otherTest"])
+    fun otherTest(@RequestParam(value = "xid") xid: String): String {
+        RootContext.bind(xid)
+        val name = "another-updated-user-1"
+        println("begin otherTest ${getTime()}")
+        jdbcTemplate.update("update user1 set name = '$name' where id = 1")
+        println("finish otherTest ${getTime()}")
         return "success"
     }
 

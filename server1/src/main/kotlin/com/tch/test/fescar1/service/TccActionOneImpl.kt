@@ -1,5 +1,6 @@
 package com.tch.test.fescar1.service
 
+import com.alibaba.fastjson.JSON
 import com.tch.test.tcc.api.TccActionOne
 import io.seata.rm.tcc.api.BusinessActionContext
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +15,7 @@ class TccActionOneImpl : TccActionOne {
 
     override fun prepare(actionContext: BusinessActionContext, a: Int): Boolean {
         val xid = actionContext.xid
-        println("TccActionOne prepare, xid:$xid, a:$a")
+        println("TccActionOne prepare, ${JSON.toJSONString(actionContext)}")
         val name = "tcc-updated-user-1"
         jdbcTemplate.update("update user1 set temp_name = '$name' where id = 1")
         return true

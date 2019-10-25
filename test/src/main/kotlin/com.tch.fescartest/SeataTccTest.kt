@@ -23,8 +23,8 @@ class SeataTccTest {
 fun main(args: Array<String>) {
     val applicationContext = SpringApplication.run(SeataTccTest::class.java, *args)
     val tccTransactionService = applicationContext.getBean(TccTransactionService::class.java)
-    println("doTransactionCommit result: " + tccTransactionService.doTransactionCommit())
-//    val map = mutableMapOf<Any, Any>()
-//    println("doTransactionCommit result: " + tccTransactionService.doTransactionRollback(map) + " , map: $map")
+//    println("doTransactionCommit result: " + tccTransactionService.doTransactionCommit())
+    val map = mutableMapOf<Any, Any>()
+    println("doTransactionCommit result: " + tccTransactionService.doTransactionRollback(map) + " , map: $map")
 }
 

@@ -10,8 +10,10 @@ import io.seata.tm.api.transaction.RollbackRule
 import io.seata.tm.api.transaction.TransactionInfo
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 private const val APPLICATION_ID = "my_test_app"
 private const val TX_SERVICE_GROUP = "my_test_tx_group"
@@ -19,13 +21,32 @@ private const val TX_SERVICE_GROUP = "my_test_tx_group"
 fun main(args: Array<String>) {
     TMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
     RMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
-//    testException()
-    testNormal()
+    testException()
+//    val countDownLatch = CountDownLatch(2)
+//    thread {
+//        try {
+//            testNormal()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//        countDownLatch.countDown()
+//    }
+//    thread {
+//        try {
+//            TimeUnit.SECONDS.sleep(4)
+//            anotherTestNormal()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//        countDownLatch.countDown()
+//    }
 //    testTimeout()
 //    testCrash()
 //    testTCCrash()
 
 //    testMultipleGlobalTransactions()
+
+//    countDownLatch.await()
 }
 
 
@@ -89,13 +110,24 @@ private fun testCrash() {
 
 private fun testNormal() {
     val name = "testNormal"
-    doInGlobalTransaction(5000) {
+    doInGlobalTransaction(20000) {
         val xid = RootContext.getXID()
         println("$name xid is $xid")
         val firstResult = HttpRequest.get("http://localhost:8081/?xid=$xid").body()
         val secondResult = HttpRequest.get("http://localhost:8082/?xid=$xid").body()
         println("$name firstResult: $firstResult")
         println("$name secondResult: $secondResult")
+        "success"
+    }
+}
+
+private fun anotherTestNormal() {
+    val name = "anotherTestNormal"
+    doInGlobalTransaction(10000) {
+        val xid = RootContext.getXID()
+        println("$name xid is $xid")
+        val firstResult = HttpRequest.get("http://localhost:8081/otherTest?xid=$xid").body()
+        println("$name firstResult: $firstResult")
         "success"
     }
 }
