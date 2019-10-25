@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
  * @create: 2019-01-30
  **/
 @RestController
-class HelloWorldController {
+class Server1Controller {
 
     @Autowired
     private lateinit var jdbcTemplate: JdbcTemplate

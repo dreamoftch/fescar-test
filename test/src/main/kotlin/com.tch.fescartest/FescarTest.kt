@@ -21,35 +21,57 @@ private const val TX_SERVICE_GROUP = "my_test_tx_group"
 fun main(args: Array<String>) {
     TMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
     RMClient.init(APPLICATION_ID, TX_SERVICE_GROUP)
-    testException()
-//    val countDownLatch = CountDownLatch(2)
-//    thread {
-//        try {
-//            testNormal()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        countDownLatch.countDown()
-//    }
-//    thread {
-//        try {
-//            TimeUnit.SECONDS.sleep(4)
-//            anotherTestNormal()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        countDownLatch.countDown()
-//    }
+//    testException()
+    testConcurrentModify()
 //    testTimeout()
 //    testCrash()
 //    testTCCrash()
 
 //    testMultipleGlobalTransactions()
 
-//    countDownLatch.await()
+
 }
 
-
+private fun testConcurrentModify() {
+    val countDownLatch = CountDownLatch(2)
+    thread {
+        try {
+            val name = "testNormal"
+            doInGlobalTransaction(20000) {
+                val xid = RootContext.getXID()
+                println("$name xid is $xid")
+                val firstResult = HttpRequest.get("http://localhost:8081/?xid=$xid").body()
+                TimeUnit.SECONDS.sleep(3)
+                val secondResult = HttpRequest.get("http://localhost:8082/?xid=$xid").body()
+                println("$name firstResult: $firstResult")
+                println("$name secondResult: $secondResult")
+                "success"
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        countDownLatch.countDown()
+    }
+    thread {
+        try {
+            val name = "testNormal2"
+            doInGlobalTransaction(20000) {
+                val xid = RootContext.getXID()
+                println("$name xid is $xid")
+                val secondResult = HttpRequest.get("http://localhost:8082/?xid=$xid").body()
+                TimeUnit.SECONDS.sleep(2)
+                val firstResult = HttpRequest.get("http://localhost:8081/?xid=$xid").body()
+                println("$name firstResult: $firstResult")
+                println("$name secondResult: $secondResult")
+                "success"
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        countDownLatch.countDown()
+    }
+    countDownLatch.await()
+}
 
 private fun testMultipleGlobalTransactions() {
     val pool = Executors.newFixedThreadPool(2)

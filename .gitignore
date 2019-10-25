@@ -24,7 +24,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-
+*/out/*
 server1/out/
 server1/build/
 server2/out/
